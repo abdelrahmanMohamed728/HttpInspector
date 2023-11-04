@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -67,6 +68,20 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    //Ok http
     val okHttpVersion = "4.11.0"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
+
+    //hilt
+    val hiltVersion = "2.48.1"
+    implementation ("com.google.dagger:hilt-android:$hiltVersion")
+    annotationProcessor ("com.google.dagger:hilt-compiler:$hiltVersion")
+
+    //room
+    val roomVersion = "2.6.0"
+    implementation ("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor ("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:$roomVersion")
+
 }
