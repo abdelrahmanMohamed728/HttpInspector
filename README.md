@@ -1,0 +1,13 @@
+# HttpInspector
+
+**HttpInspector** is a powerful Android library that simplifies the debugging and monitoring of HTTP requests in your Android applications. This tool allows you to capture, log, and visualize your app's network activity, offering comprehensive insights into API calls, request details, response data, and more.
+
+## Key Features
+
+- **Real-time Tracking:** Monitor HTTP interactions in real time.
+- **Detailed Logging:** Log request and response details, including headers and payloads.
+- **Integration:** Easily integrate HttpInspector into your Android projects.
+- **Troubleshooting:** Diagnose issues, optimize performance, and enhance network functionality.
+- **Open Source:** Adapt and extend HttpInspector to meet your specific requirements.
+
+## Getting Started
