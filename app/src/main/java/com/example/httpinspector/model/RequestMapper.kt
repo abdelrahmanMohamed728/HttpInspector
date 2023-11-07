@@ -10,6 +10,7 @@ class RequestMapper {
                 it.toString()
             }
             return HttpRequest(
+                url = request.url.toString(),
                 isHttps = request.isHttps,
                 requestBody = requestBody,
                 requestHeader = requestHeader

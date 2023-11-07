@@ -1,7 +1,10 @@
 package com.example.httpinspector.interceptor
 
+import com.example.httpinspector.local.HttpDatabase
 import com.example.httpinspector.model.RequestMapper
 import com.example.httpinspector.model.repo.HttpRequestRepo
+import com.example.httpinspector.model.repo.HttpRequestRepoImpl
+import com.example.httpinspector.utils.ContextManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -9,12 +12,11 @@ import kotlinx.coroutines.withContext
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
-import javax.inject.Inject
 
 class HttpInterceptor : Interceptor {
 
-    @Inject
-    private lateinit var httpRequestRepo: HttpRequestRepo
+    private val dao = HttpDatabase.getDatabase(ContextManager.getInstance().getContext()).requestsDao()
+    private var httpRequestRepo = HttpRequestRepoImpl(dao)
     private val mainScope = MainScope()
 
     override fun intercept(chain: Interceptor.Chain): Response {

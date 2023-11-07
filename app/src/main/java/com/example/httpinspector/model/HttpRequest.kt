@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class HttpRequest(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
+    val url: String,
     val requestBody: String,
     val requestHeader: List<String>,
     var responseBody: String? = null,

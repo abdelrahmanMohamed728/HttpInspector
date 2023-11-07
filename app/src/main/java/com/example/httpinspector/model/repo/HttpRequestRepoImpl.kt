@@ -1,16 +1,14 @@
 package com.example.httpinspector.model.repo
 
-import com.example.httpinspector.local.HttpDatabase
+import com.example.httpinspector.local.HttpRequestsDao
 import com.example.httpinspector.model.HttpRequest
 
-class HttpRequestRepoImpl(
-    db: HttpDatabase
+class HttpRequestRepoImpl constructor(
+    val requestsDao: HttpRequestsDao
 ) : HttpRequestRepo {
 
-    private val requestsDao = db.requestsDao()
-
     override suspend fun addHttpCall(httpRequest: HttpRequest) {
-       requestsDao.insertRequest(httpRequest)
+        requestsDao.insertRequest(httpRequest)
     }
 
     override suspend fun addHttpCallResponse(httpRequest: HttpRequest) {
