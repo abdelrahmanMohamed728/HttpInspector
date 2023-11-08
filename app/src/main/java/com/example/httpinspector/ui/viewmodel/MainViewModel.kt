@@ -1,5 +1,6 @@
 package com.example.httpinspector.ui.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,7 +22,7 @@ class MainViewModel constructor(
                 try {
                     requestsMutableState.value = httpRequestRepo.getRequests()
                 } catch (ex: Exception) {
-                    //TODO handle exceptions
+                    Log.e("network error", ex.message.toString())
                 }
             }
         }

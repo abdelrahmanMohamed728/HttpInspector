@@ -34,7 +34,7 @@ import com.example.httpinspector.ui.viewmodel.viewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun httpInspectorFloatingButton(modifier: Modifier) {
+fun HttpInspectorFloatingButton(modifier: Modifier) {
     val dao = HttpDatabase.getDatabase(LocalContext.current).requestsDao()
     val repo = HttpRequestRepoImpl(dao)
     val viewModel: MainViewModel = viewModel(factory = viewModelFactory {
@@ -89,5 +89,5 @@ fun httpInspectorFloatingButton(modifier: Modifier) {
 @Preview
 @Composable
 fun previewHttpFloatingButton() {
-    httpInspectorFloatingButton(modifier = Modifier)
+    HttpInspectorFloatingButton(modifier = Modifier)
 }

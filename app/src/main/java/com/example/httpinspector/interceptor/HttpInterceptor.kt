@@ -6,6 +6,7 @@ import com.example.httpinspector.model.repo.HttpRequestRepo
 import com.example.httpinspector.model.repo.HttpRequestRepoImpl
 import com.example.httpinspector.utils.ContextManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,15 +20,17 @@ class HttpInterceptor : Interceptor {
     private var httpRequestRepo = HttpRequestRepoImpl(dao)
     private val mainScope = MainScope()
 
+    @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val httpRequest = RequestMapper.fromRequestToHttpCall(chain.request())
+        val request = chain.request()
+        val httpRequest = RequestMapper.fromRequestToHttpCall(request)
         mainScope.launch {
             withContext(Dispatchers.IO) {
                 httpRequestRepo.addHttpCall(httpRequest)
             }
         }
         val response = try {
-            chain.proceed(chain.request())
+            chain.proceed(request)
         } catch (ex: IOException) {
             //TODO cache the exception
             throw ex
