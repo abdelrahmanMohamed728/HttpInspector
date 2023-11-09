@@ -24,21 +24,18 @@ class HttpInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val httpRequest = RequestMapper.fromRequestToHttpCall(request)
-        mainScope.launch {
-            withContext(Dispatchers.IO) {
-                httpRequestRepo.addHttpCall(httpRequest)
-            }
-        }
         val response = try {
             chain.proceed(request)
         } catch (ex: IOException) {
-            //TODO cache the exception
+            httpRequest.errorMessage = ex.toString()
             throw ex
         }
-        httpRequest.responseBody = response.body.toString()
+        httpRequest.responseBody = response.body?.string()
+
+        httpRequest.code = response.code
         mainScope.launch {
             withContext(Dispatchers.IO) {
-                httpRequestRepo.addHttpCallResponse(httpRequest)
+                httpRequestRepo.addHttpCall(httpRequest)
             }
         }
         return response

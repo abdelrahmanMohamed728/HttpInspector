@@ -8,9 +8,16 @@ import androidx.room.PrimaryKey
 data class HttpRequest(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
+    val method: String,
+    var code: Int = 0,
     val url: String,
     val requestBody: String,
     val requestHeader: List<String>,
     var responseBody: String? = null,
-    val isHttps: Boolean
-)
+    val isHttps: Boolean,
+    var errorMessage: String? = null
+) {
+    fun isSuccessfulRequest(): Boolean {
+        return code == 200 || code == 204
+    }
+}

@@ -8,6 +8,6 @@ import retrofit2.http.GET
 
 
 interface PlaceholderService {
-    @GET("posts")
+    @GET("posts21323")
     suspend fun listPosts(): Response<List<PostItem>>
 }

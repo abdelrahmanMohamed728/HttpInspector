@@ -59,27 +59,12 @@ fun HttpInspectorFloatingButton(modifier: Modifier) {
         // Screen content
         Box(modifier = Modifier.padding(contentPadding)) {
             if (showBottomSheet) {
-                ModalBottomSheet(
-                    onDismissRequest = {
-                        showBottomSheet = false
-                    },
+                RequestsBottomSheet(
+                    requests = viewModel.requestsMutableState.value,
                     sheetState = sheetState,
-
-                    ) {
-                    Column {
-                        requestsView(requests = viewModel.requestsMutableState.value)
-                    }
-                    Button(modifier = Modifier
-                        .height(20.dp)
-                        .width(20.dp), onClick = {
-                        scope.launch { sheetState.expand() }.invokeOnCompletion {
-                            if (!sheetState.isVisible) {
-                                showBottomSheet = false
-                            }
-                        }
-                    }) {
-                        Text("Close bottom sheet")
-                    }
+                    scope = scope
+                ) {
+                    showBottomSheet = false
                 }
             }
         }
