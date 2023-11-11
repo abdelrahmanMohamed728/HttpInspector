@@ -30,7 +30,7 @@ fun RequestsBottomSheet(
         sheetState = sheetState,
     ) {
         Column {
-            requestsView(requests = requests)
+            RequestsView(requests = requests)
             Button(
                 modifier = Modifier
                     .height(20.dp)

@@ -92,4 +92,9 @@ dependencies {
     //compose viewmodel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
+    //Nav Host
+    val nav_version = "2.7.5"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+
 }
