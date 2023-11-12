@@ -11,3 +11,13 @@
 - **Open Source:** Adapt and extend HttpInspector to meet your specific requirements.
 
 ## Getting Started
+
+1. **Installation:**
+
+   To integrate HttpInspector into your Android project, add the following dependency to your module-level `build.gradle` file:
+
+   ```gradle
+
+   dependencies {
+       implementation 'com.github.abdelrahmanMohamed728:HttpInspector:version'
+   } 
