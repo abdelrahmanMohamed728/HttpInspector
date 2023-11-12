@@ -7,13 +7,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
+import com.example.httpinspector.HttpInspectorBuilder
 import com.example.httpinspector.ui.views.HttpInspectorFloatingButton
-import com.example.httpinspector.utils.ContextManager
 import com.example.sampleapp.service.PlaceholderService
 import com.example.sampleapp.service.RetrofitClient
 import com.example.sampleapp.ui.theme.Http_inspectorTheme
@@ -24,7 +21,7 @@ import kotlinx.coroutines.withContext
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ContextManager.getInstance().initialize(applicationContext)
+        HttpInspectorBuilder.initialize(applicationContext)
         val client = RetrofitClient.getInstance().create(PlaceholderService::class.java)
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
@@ -47,21 +44,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Http_inspectorTheme {
-        Greeting("Android")
     }
 }
