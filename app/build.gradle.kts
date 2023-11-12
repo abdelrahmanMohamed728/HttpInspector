@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
+    id("maven-publish")
 }
 
 android {
@@ -80,13 +81,13 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
 
     // gson
-    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     //Material Design
-    implementation ("androidx.compose.material3:material3:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
 
     //compose viewmodel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
     //Nav Host
     val nav_version = "2.7.5"
