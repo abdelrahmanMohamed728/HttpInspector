@@ -100,3 +100,18 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
 }
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.abdelrahmanMohamed728"
+            artifactId = "HttpInspector"
+            version = "0.0.3"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
+
