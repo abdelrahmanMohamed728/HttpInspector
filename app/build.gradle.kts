@@ -93,5 +93,19 @@ dependencies {
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
+}
 
+
+configure<PublishingExtension> {
+    publications.create<MavenPublication>("HttpInspector") {
+        groupId = "com.abdelrahman.http_inspector"
+        artifactId = "HttpInspector"
+        version = "1.0.0"
+        pom.packaging = "jar"
+        artifact("$buildDir/libs/MyPlugin.jar")
+
+    }
+    repositories {
+        mavenLocal()
+    }
 }
