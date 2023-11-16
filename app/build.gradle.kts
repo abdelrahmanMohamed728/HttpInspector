@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -47,10 +48,7 @@ android {
         }
     }
     publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
+
     }
 }
 
@@ -98,15 +96,14 @@ dependencies {
     //Nav Host
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
 }
 
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.github.abdelrahmanMohamed728"
-            artifactId = "HttpInspector"
-            version = "0.0.3"
+            groupId = "com.github.abdelrahmanmohamed728"
+            artifactId = "http_inspector"
+            version = "0.0.1-alpha"
 
             afterEvaluate {
                 from(components["release"])
@@ -114,4 +111,10 @@ publishing {
         }
     }
 }
+
+
+
+
+
+
 
