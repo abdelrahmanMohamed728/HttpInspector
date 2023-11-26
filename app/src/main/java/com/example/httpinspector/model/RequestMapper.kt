@@ -13,7 +13,7 @@ class RequestMapper {
                 url = request.url.toString(),
                 isHttps = request.isHttps,
                 requestBody = requestBody,
-                requestHeader = requestHeader,
+                requestHeaders = requestHeader,
                 method = request.method
             )
         }

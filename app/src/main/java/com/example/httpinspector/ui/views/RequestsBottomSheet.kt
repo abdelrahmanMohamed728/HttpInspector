@@ -46,7 +46,5 @@ fun RequestsBottomSheet(
                 Text("Close bottom sheet")
             }
         }
-
-
     }
 }

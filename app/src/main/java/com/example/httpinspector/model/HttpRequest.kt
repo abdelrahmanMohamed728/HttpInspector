@@ -1,6 +1,5 @@
 package com.example.httpinspector.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -12,7 +11,7 @@ data class HttpRequest(
     var code: Int = 0,
     val url: String,
     val requestBody: String,
-    val requestHeader: List<String>,
+    val requestHeaders: List<String>,
     var responseBody: String? = null,
     val isHttps: Boolean,
     var errorMessage: String? = null

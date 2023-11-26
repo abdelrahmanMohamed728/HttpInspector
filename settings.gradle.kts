@@ -15,5 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "http_inspector"
 include(":app")
-include(":app:sampleapp")
 include(":sampleapp")
