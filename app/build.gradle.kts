@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -96,6 +95,14 @@ dependencies {
     //Nav Host
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //supabase
+    val supabase_version = "2.0.1"
+    implementation("io.github.jan-tennert.supabase:stable:$supabase_version")
+
+    //ktor
+    val ktor_version = "2.3.7"
+    implementation("io.ktor:ktor-client-core:$ktor_version")
 }
 
 publishing {
