@@ -1,4 +1,5 @@
-# Http Inspector
+
+![background image](background.png)
 
 **Http Inspector** is a powerful Android library that simplifies the debugging and monitoring of
 HTTP requests in your Android applications. This tool allows you to capture, log, and visualize your
