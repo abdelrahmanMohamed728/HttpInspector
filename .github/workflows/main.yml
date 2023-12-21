@@ -17,10 +17,7 @@ jobs:
           java -version
           echo "Gradle Version:"
           ./gradlew --version
-          echo "Repository Configuration:"
-          cat build.gradle # Display repository configuration
-          echo "Gradle Dependency Resolution:"
-          ./gradlew dependencies # Display dependency tree or other resolution information
+          
       - name: Clear Gradle Cache
         run: ./gradlew clean build --refresh-dependencies
       - name: Dependency Check
