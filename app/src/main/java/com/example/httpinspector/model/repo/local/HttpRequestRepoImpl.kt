@@ -1,10 +1,10 @@
-package com.example.httpinspector.model.repo
+package com.example.httpinspector.model.repo.local
 
 import com.example.httpinspector.local.HttpRequestsDao
 import com.example.httpinspector.model.HttpRequest
 
-class HttpRequestRepoImpl constructor(
-    val requestsDao: HttpRequestsDao
+class HttpRequestRepoImpl(
+    private val requestsDao: HttpRequestsDao
 ) : HttpRequestRepo {
 
     override suspend fun addHttpCall(httpRequest: HttpRequest) {
@@ -19,7 +19,15 @@ class HttpRequestRepoImpl constructor(
         requestsDao.deleteRequest(httpRequest)
     }
 
+    override suspend fun getNotSyncedRequests(): List<HttpRequest> {
+        return requestsDao.getNotSyncedRequests()
+    }
+
     override suspend fun getRequests(): List<HttpRequest> {
         return requestsDao.getRequests()
+    }
+
+    override suspend fun markAsSynced() {
+        requestsDao.markAsSynced()
     }
 }

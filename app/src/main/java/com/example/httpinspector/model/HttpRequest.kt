@@ -14,7 +14,8 @@ data class HttpRequest(
     val requestHeaders: List<String>,
     var responseBody: String? = null,
     val isHttps: Boolean,
-    var errorMessage: String? = null
+    var errorMessage: String? = null,
+    var isSynced: Boolean = false
 ) {
     fun isSuccessfulRequest(): Boolean {
         return code == 200 || code == 204

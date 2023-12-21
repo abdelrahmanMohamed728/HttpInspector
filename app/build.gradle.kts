@@ -1,22 +1,43 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
     id("maven-publish")
+    id("kotlinx-serialization")
+}
+
+fun getSupabaseUrl(): String {
+    val propFile = rootProject.file("./local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propFile))
+    return properties.getProperty("SUPABASE_URL") ?: ""
+}
+
+fun getSupabaseKey(): String {
+    val propFile = rootProject.file("./local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propFile))
+    return properties.getProperty("SUPABASE_KEY") ?: ""
 }
 
 android {
     namespace = "com.example.httpinspector"
     compileSdk = 34
-
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "SUPABASE_URL", "\"${getSupabaseUrl()}\"")
+        buildConfigField("String", "SUPABASE_KEY", "\"${getSupabaseKey()}\"")
     }
 
     buildTypes {
@@ -46,9 +67,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    publishing {
-
-    }
 }
 
 dependencies {
@@ -61,7 +79,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.core:core-ktx:+")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -98,11 +115,15 @@ dependencies {
 
     //supabase
     val supabase_version = "2.0.1"
-    implementation("io.github.jan-tennert.supabase:stable:$supabase_version")
+    implementation(platform("io.github.jan-tennert.supabase:bom:$supabase_version"))
+    implementation("io.github.jan-tennert.supabase:gotrue-kt")
+    implementation("io.github.jan-tennert.supabase:functions-kt")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
 
     //ktor
     val ktor_version = "2.3.7"
     implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
 }
 
 publishing {

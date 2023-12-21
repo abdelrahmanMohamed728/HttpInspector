@@ -21,7 +21,8 @@ import kotlinx.coroutines.withContext
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        HttpInspectorBuilder.initialize(applicationContext)
+        HttpInspectorBuilder.getInstance()
+            .initialize(applicationContext, "62c9b701-58fb-4f44-bdb8-dd4f3f368376")
         val client = RetrofitClient.getInstance().create(PlaceholderService::class.java)
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {

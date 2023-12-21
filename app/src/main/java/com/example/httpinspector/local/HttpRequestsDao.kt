@@ -20,7 +20,13 @@ interface HttpRequestsDao {
     @Delete
     suspend fun deleteRequest(request: HttpRequest)
 
+    @Query("SELECT * FROM requests WHERE isSynced = 0")
+    suspend fun getNotSyncedRequests(): List<HttpRequest>
+
     @Query("SELECT * FROM requests")
     suspend fun getRequests(): List<HttpRequest>
+
+    @Query("UPDATE requests SET isSynced = 1")
+    suspend fun markAsSynced()
 
 }

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.httpinspector.model.HttpRequest
-import com.example.httpinspector.model.repo.HttpRequestRepo
+import com.example.httpinspector.model.repo.local.HttpRequestRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

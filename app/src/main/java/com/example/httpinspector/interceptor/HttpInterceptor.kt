@@ -2,11 +2,9 @@ package com.example.httpinspector.interceptor
 
 import com.example.httpinspector.local.HttpDatabase
 import com.example.httpinspector.model.RequestMapper
-import com.example.httpinspector.model.repo.HttpRequestRepo
-import com.example.httpinspector.model.repo.HttpRequestRepoImpl
+import com.example.httpinspector.model.repo.local.HttpRequestRepoImpl
 import com.example.httpinspector.utils.ContextManager
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,7 +14,8 @@ import java.io.IOException
 
 class HttpInterceptor : Interceptor {
 
-    private val dao = HttpDatabase.getDatabase(ContextManager.getInstance().getContext()).requestsDao()
+    private val dao =
+        HttpDatabase.getDatabase(ContextManager.getInstance().getContext()).requestsDao()
     private var httpRequestRepo = HttpRequestRepoImpl(dao)
     private val mainScope = MainScope()
 
@@ -30,7 +29,7 @@ class HttpInterceptor : Interceptor {
             httpRequest.errorMessage = ex.toString()
             throw ex
         }
-        httpRequest.responseBody = response.body?.string()
+        httpRequest.responseBody = response.peekBody(2048).string()
 
         httpRequest.code = response.code
         mainScope.launch {
