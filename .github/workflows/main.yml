@@ -29,7 +29,13 @@ jobs:
         env:
           APOD_API_KEY: ${{ secrets.SUPABASE_KEY}}
         run: echo APOD_API_KEY=\"$SUPABASE_KEY\" > ./local.properties
-      - name: Build with Gradle
-        run: | 
-         ./gradlew wrapper --gradle-version=8.4
-         ./gradlew build
+      - name: Install Gradle
+        run: |
+          curl -s "https://get.sdkman.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install gradle 8.4
+
+      - name: Build with specific Gradle version
+        run: |
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          gradle build 
