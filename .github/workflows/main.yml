@@ -21,10 +21,6 @@ jobs:
           java -version
           echo "Gradle Version:"
           ./gradlew --version
-      - name: Clear Gradle Cache
-        run: ./gradlew clean build --refresh-dependencies
-      - name: Dependency Check
-        run: ./gradlew dependencies
       - name: Access SUPABASE_URL
         env:
           APOD_API_KEY: ${{ secrets.SUPABASE_URL}}
@@ -33,7 +29,5 @@ jobs:
         env:
           APOD_API_KEY: ${{ secrets.SUPABASE_KEY}}
         run: echo APOD_API_KEY=\"$SUPABASE_KEY\" > ./local.properties
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
       - name: Build the app
         run: ./gradlew assembleDebug
