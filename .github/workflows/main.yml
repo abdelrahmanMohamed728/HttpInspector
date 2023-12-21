@@ -19,11 +19,5 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Create local.properties file
-        run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> local.properties
-          echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> local.properties
-          cat local.properties  # Display the content for verification
-
       - name: Build and test the library
         run: ./gradlew build  # Modify this command based on your library's build process
