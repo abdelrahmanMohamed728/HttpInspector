@@ -25,5 +25,7 @@ jobs:
         run: echo APOD_API_KEY=\"$SUPABASE_KEY\" > ./local.properties
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+      - name: Build AAR ⚙️🛠
+        run: bash ./gradlew :simplelibrary:assemble
       - name: Build the app
         run: ./gradlew assembleDebug
