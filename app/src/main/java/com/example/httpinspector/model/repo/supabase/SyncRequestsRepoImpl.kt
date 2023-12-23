@@ -4,10 +4,9 @@ import com.example.httpinspector.model.HttpRequestDTO
 import com.example.httpinspector.utils.SupabaseClient
 
 class SyncRequestsRepoImpl : SyncRequestsRepo {
-    private val supabaseClient = SupabaseClient()
+    private val supabaseClient = SupabaseClient.getInstance()
 
     override suspend fun sendRequests(requests: List<HttpRequestDTO>) {
-        supabaseClient.authorize("ahmed@gmail.com","Ahmed@1234")
-        SupabaseClient().insertRequests(SupabaseTables.REQUESTS.tableName, requests)
+        supabaseClient.insertRequests(SupabaseTables.REQUESTS.tableName, requests)
     }
 }

@@ -6,7 +6,8 @@ import com.example.httpinspector.model.HttpRequestMapper
 import com.example.httpinspector.model.repo.local.HttpRequestRepoImpl
 import com.example.httpinspector.model.repo.supabase.SyncRequestsRepoImpl
 import com.example.httpinspector.utils.ContextManager
-import com.example.httpinspector.utils.UserInfo
+import com.example.httpinspector.utils.SupabaseClient
+import com.example.httpinspector.utils.BaseUser
 import com.example.httpinspector.utils.network.ConnectivityObserver
 import com.example.httpinspector.utils.network.IConnectivityObserver
 import kotlinx.coroutines.MainScope
@@ -25,9 +26,9 @@ class HttpInspectorBuilder {
         }
     }
 
-    fun initialize(context: Context, id: String) {
+    suspend fun initialize(context: Context, email: String, password: String) {
+        SupabaseClient.getInstance().authorize(email, password)
         ContextManager.getInstance().initialize(context)
-        UserInfo.setUserId(id)
         initNetworkObserver()
     }
 
@@ -45,7 +46,8 @@ class HttpInspectorBuilder {
         val dao = HttpDatabase.getDatabase(context).requestsDao()
         val localRepo = HttpRequestRepoImpl(dao)
         val mapper = HttpRequestMapper()
-        val requests = localRepo.getNotSyncedRequests().map { mapper.toDto(it, UserInfo.id ?: "") }
+        val requests =
+            localRepo.getNotSyncedRequests().map { mapper.toDto(it, BaseUser.user?.id ?: "") }
         val syncRepo = SyncRequestsRepoImpl()
         syncRepo.sendRequests(requests)
         localRepo.markAsSynced()
