@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HttpInspectorBuilder.getInstance()
-            .initialize(applicationContext, "62c9b701-58fb-4f44-bdb8-dd4f3f368376")
+            .initialize(applicationContext, "5e40f05e-6471-4897-b388-ebc99c13244b")
         val client = RetrofitClient.getInstance().create(PlaceholderService::class.java)
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {

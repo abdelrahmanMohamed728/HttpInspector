@@ -11,17 +11,11 @@ plugins {
 }
 
 fun getSupabaseUrl(): String {
-    val propFile = rootProject.file("./local.properties")
-    val properties = Properties()
-    properties.load(FileInputStream(propFile))
-    return properties.getProperty("SUPABASE_URL") ?: ""
+    return "https://dtpjecnnuqsayigslrvv.supabase.co"
 }
 
 fun getSupabaseKey(): String {
-    val propFile = rootProject.file("./local.properties")
-    val properties = Properties()
-    properties.load(FileInputStream(propFile))
-    return properties.getProperty("SUPABASE_KEY") ?: ""
+    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cGplY25udXFzYXlpZ3NscnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI4MTY2NTksImV4cCI6MjAxODM5MjY1OX0.2wpn8jozDwql27bufP_uwcfhYPMx1WTJD8_gNWdp7_8"
 }
 
 android {
@@ -94,9 +88,6 @@ dependencies {
     //room
     val roomVersion = "2.6.0"
     implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-
-    // To use Kotlin Symbol Processing (KSP)
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
